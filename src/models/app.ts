@@ -1,0 +1,1 @@
+export type IShowType = 'characters' | 'locations' | 'episodes' | undefined;
