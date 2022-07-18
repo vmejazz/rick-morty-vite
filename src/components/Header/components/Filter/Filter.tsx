@@ -5,11 +5,18 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Typography from "@mui/material/Typography";
 import { useDispatch, useSelector } from "react-redux";
-import { selectApp } from "../../store";
-import { getApiUrl, getData } from "../../utils";
-import { getRequestData } from "../../api/utils";
+import { getApiUrl, getData } from "../../../../utils";
+import { getRequestData } from "../../../../api/utils";
 import { FilterWrapper } from "./components";
-import { clearFilter, setFilterApplied } from "../../store/slices/appReducer";
+import {
+  clearFilter,
+  setFilterApplied,
+} from "../../../../store/slices/appReducer";
+import {
+  selectFilter,
+  selectIsApplied,
+  selectShowType,
+} from "../../../../store";
 
 export interface DialogTitleProps {
   id: string;
@@ -20,7 +27,9 @@ export interface DialogTitleProps {
 export const Filter = memo(() => {
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
-  const { filter, showType, isApplied } = useSelector(selectApp);
+  const filter = useSelector(selectFilter);
+  const showType = useSelector(selectShowType);
+  const isApplied = useSelector(selectIsApplied);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -47,15 +56,13 @@ export const Filter = memo(() => {
   return (
     <div>
       {isApplied && (
-        <>
-          <Button
-            variant="contained"
-            onClick={handleOnClear}
-            sx={{ marginRight: "10px" }}
-          >
-            Clear filter
-          </Button>
-        </>
+        <Button
+          variant="contained"
+          onClick={handleOnClear}
+          sx={{ marginRight: "10px" }}
+        >
+          Clear filter
+        </Button>
       )}
       <Button variant="contained" onClick={handleClickOpen}>
         Open filter

@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
-import { selectApp } from "../../store";
+import { selectHasError, selectIsLoading, selectShowType } from "../../store";
 import { Loading } from "./components/Loading";
 import { ContentWrapper } from "./ContentStyled";
 import {
@@ -12,7 +12,9 @@ import {
 import { ItemsType } from "../../models";
 
 export const Content: FC = () => {
-  const { hasError, isLoading, showType } = useSelector(selectApp);
+  const hasError = useSelector(selectHasError);
+  const isLoading = useSelector(selectIsLoading);
+  const showType = useSelector(selectShowType);
 
   let content;
   switch (showType) {

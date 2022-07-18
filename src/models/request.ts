@@ -1,19 +1,21 @@
+export type IGender = "female" | "male" | "genderless" | "unknown";
+export type ILiveStatus = "alive" | "dead" | "unknown";
+
 export interface ICharacterRequest {
   name?: string;
-  status?: 'alive' | 'dead' | 'unknown';
+  status?: ILiveStatus;
   species?: string;
   type?: string;
-  gender?: 'female' | 'male' | 'genderless' | 'unknown';
+  gender?: IGender;
 }
 
 export interface ILocationsRequest {
   name?: string;
   type?: string;
-  dimension?: string
+  dimension?: string;
 }
 
 export interface IEpisodeRequest {
   name?: string;
   episode?: string;
 }
-

@@ -1,16 +1,18 @@
 import { Button, Divider, Stack } from "@mui/material";
-import { FC, memo, useCallback } from "react";
-import { useDispatch } from "react-redux";
+import { FC, memo, useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { ItemsType } from "../../models";
-import { clearFilter, setFilter } from "../../store/slices/appReducer";
+import { selectShowType } from "../../store";
+import { clearFilter } from "../../store/slices/appReducer";
 import { getApiUrl, getData } from "../../utils";
-import { Filter } from "../Filter";
-import { FilterStatus } from "../FilterStatus";
-import { PaginationField } from "../PaginationField";
-import { ButtonsStyled, FilterStyled, HeaderStyled } from "./HeaderStyled";
+import { Filter, FilterStatus, PaginationField } from "./components";
+import { ButtonsStyled, HeaderStyled } from "./HeaderStyled";
+import { v4 as uuid } from "uuid";
 
 export const Header: FC = memo(() => {
   const dispatch = useDispatch();
+  const showType = useSelector(selectShowType);
+  const [lasType, setLastType] = useState<string>(uuid());
 
   const handleClickCharacters = useCallback(() => {
     getData(
@@ -30,6 +32,10 @@ export const Header: FC = memo(() => {
     getData(dispatch, `${getApiUrl(ItemsType.EPISODES)}`, ItemsType.EPISODES);
     dispatch(clearFilter());
   }, []);
+
+  useEffect(() => {
+    setLastType(uuid());
+  }, [showType]);
 
   return (
     <>
@@ -68,7 +74,7 @@ export const Header: FC = memo(() => {
         <Filter />
       </ButtonsStyled>
 
-      <PaginationField />
+      <PaginationField key={lasType} />
       <FilterStatus />
       <Divider sx={{ margin: "20px 0" }} />
     </>

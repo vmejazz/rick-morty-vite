@@ -10,83 +10,48 @@ interface IProps {
 }
 
 export const CharacterCard: FC<IProps> = memo(({ item }) => {
-  const {
-    image,
-    id,
-    created,
-    episode,
-    gender,
-    location,
-    name,
-    origin,
-    species,
-    status,
-    type,
-    url,
-  } = item;
-  const itemKeys = Object.keys(item) as Array<keyof ICharacter>;
+  const { image, created, gender, location, name, species, status } = item;
 
   return (
     <Card sx={{ width: 280, margin: "10px" }}>
       <CardMedia component="img" height="200" image={image} />
+
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography gutterBottom variant="h5" component="div" noWrap>
           {name}
         </Typography>
 
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography variant="body2" color="text.secondary">
-            Created:
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {new Date(created).toLocaleDateString()}
-          </Typography>
-        </div>
-
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography variant="body2" color="text.secondary">
-            Status:
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {status}
-          </Typography>
-        </div>
-
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography variant="body2" color="text.secondary">
-            Gender:
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {gender}
-          </Typography>
-        </div>
-
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography variant="body2" color="text.secondary">
-            Species:
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {species}
-          </Typography>
-        </div>
-
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography variant="body2" color="text.secondary">
-            Origin:
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {origin.name}
-          </Typography>
-        </div>
-
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography variant="body2" color="text.secondary">
-            Location:
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {location.name}
-          </Typography>
-        </div>
+        <Typography variant="body2" noWrap>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <span>Status:</span>
+            <span>{status}</span>
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <span>Gender:</span>
+            <span>{gender}</span>
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <span>Species:</span>
+            <span>{species}</span>
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <span>Location:</span>
+            <span
+              style={{
+                overflow: "hidden",
+                flexShrink: "0",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {location.name}
+            </span>
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <span>Created:</span>
+            <span>{new Date(created).toLocaleDateString()}</span>
+          </div>
+        </Typography>
       </CardContent>
     </Card>
   );

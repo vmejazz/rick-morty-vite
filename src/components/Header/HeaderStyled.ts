@@ -15,9 +15,3 @@ export const ButtonsStyled = styled.div`
   margin-right: 40px;
   margin-bottom: 20px;
 `;
-
-export const FilterStyled = styled.div`
-  position: absolute;
-  top: 40px;
-  right: 130px;
-`;

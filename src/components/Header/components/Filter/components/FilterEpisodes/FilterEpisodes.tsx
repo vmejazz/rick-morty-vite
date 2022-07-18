@@ -1,15 +1,17 @@
 import { TextField, Typography } from "@mui/material";
 import { ChangeEvent, useCallback, useState } from "react";
-import { ICharacterRequest } from "../../../../models";
-import { useDispatch } from "react-redux";
-import { setFilter } from "../../../../store/slices/appReducer";
+import { IEpisodeRequest } from "../../../../../../models";
+import { useDispatch, useSelector } from "react-redux";
+import { selectFilter } from "../../../../../../store";
+import { setFilter } from "../../../../../../store/slices/appReducer";
 
 type EventType = ChangeEvent<HTMLTextAreaElement | HTMLInputElement>;
 
-export const FilterLocations = () => {
+export const FilterEpisodes = () => {
   const dispatch = useDispatch();
-  const [name, setName] = useState("");
-  const [dimension, setDimension] = useState("");
+  const filter = useSelector(selectFilter) as IEpisodeRequest;
+  const [name, setName] = useState(filter?.name || "");
+  const [episode, setEpisode] = useState(filter?.episode || "");
 
   const handleOnName = useCallback((event: EventType) => {
     const name = event.target.value;
@@ -17,10 +19,10 @@ export const FilterLocations = () => {
     dispatch(setFilter({ name }));
   }, []);
 
-  const handleOnDimension = useCallback((event: EventType) => {
-    const dimension = event.target.value;
-    setDimension(dimension);
-    dispatch(setFilter({ dimension }));
+  const handleOnEpisode = useCallback((event: EventType) => {
+    const episode = event.target.value;
+    setEpisode(episode);
+    dispatch(setFilter({ episode }));
   }, []);
 
   return (
@@ -37,12 +39,12 @@ export const FilterLocations = () => {
       </div>
 
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <Typography>Dimension</Typography>
+        <Typography>Episode</Typography>
         <TextField
           id="outlined-name"
-          label="Dimension"
-          value={dimension}
-          onChange={handleOnDimension}
+          label="Episode"
+          value={episode}
+          onChange={handleOnEpisode}
           size="small"
         />
       </div>

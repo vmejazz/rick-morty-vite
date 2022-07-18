@@ -1,5 +1,5 @@
 import { FC, memo } from "react";
-import { IShowType, ItemsType } from "../../../../models";
+import { IShowType, ItemsType } from "../../../../../../models";
 import { FilterCharacters } from "../FilterCharacters";
 import { FilterEpisodes } from "../FilterEpisodes";
 import { FilterLocations } from "../FilterLocations";

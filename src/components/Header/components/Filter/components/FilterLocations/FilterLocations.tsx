@@ -1,15 +1,17 @@
 import { TextField, Typography } from "@mui/material";
 import { ChangeEvent, useCallback, useState } from "react";
-import { ICharacterRequest } from "../../../../models";
-import { useDispatch } from "react-redux";
-import { setFilter } from "../../../../store/slices/appReducer";
+import { ICharacterRequest, ILocationsRequest } from "../../../../../../models";
+import { useDispatch, useSelector } from "react-redux";
+import { selectFilter } from "../../../../../../store";
+import { setFilter } from "../../../../../../store/slices/appReducer";
 
 type EventType = ChangeEvent<HTMLTextAreaElement | HTMLInputElement>;
 
-export const FilterEpisodes = () => {
+export const FilterLocations = () => {
   const dispatch = useDispatch();
-  const [name, setName] = useState("");
-  const [episode, setEpisode] = useState("");
+  const filter = useSelector(selectFilter) as ILocationsRequest;
+  const [name, setName] = useState(filter?.name || "");
+  const [dimension, setDimension] = useState(filter?.dimension || "");
 
   const handleOnName = useCallback((event: EventType) => {
     const name = event.target.value;
@@ -17,10 +19,10 @@ export const FilterEpisodes = () => {
     dispatch(setFilter({ name }));
   }, []);
 
-  const handleOnEpisode = useCallback((event: EventType) => {
-    const episode = event.target.value;
-    setEpisode(episode);
-    dispatch(setFilter({ episode }));
+  const handleOnDimension = useCallback((event: EventType) => {
+    const dimension = event.target.value;
+    setDimension(dimension);
+    dispatch(setFilter({ dimension }));
   }, []);
 
   return (
@@ -37,12 +39,12 @@ export const FilterEpisodes = () => {
       </div>
 
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <Typography>Episode</Typography>
+        <Typography>Dimension</Typography>
         <TextField
           id="outlined-name"
-          label="Episode"
-          value={episode}
-          onChange={handleOnEpisode}
+          label="Dimension"
+          value={dimension}
+          onChange={handleOnDimension}
           size="small"
         />
       </div>

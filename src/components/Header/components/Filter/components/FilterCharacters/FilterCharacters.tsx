@@ -7,17 +7,24 @@ import {
   Typography,
 } from "@mui/material";
 import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
-import { setFilter } from "../../../../store/slices/appReducer";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  ICharacterRequest,
+  IGender,
+  ILiveStatus,
+} from "../../../../../../models";
+import { selectFilter } from "../../../../../../store";
+import { setFilter } from "../../../../../../store/slices/appReducer";
 
 type EventType = ChangeEvent<HTMLTextAreaElement | HTMLInputElement>;
 
 export const FilterCharacters = () => {
   const dispatch = useDispatch();
-  const [name, setName] = useState("");
-  const [gender, setGender] = useState("unknown");
-  const [status, setStatus] = useState("unknown");
-  const [species, setSpecies] = useState("");
+  const filter = useSelector(selectFilter) as ICharacterRequest;
+  const [name, setName] = useState(filter?.name || "");
+  const [gender, setGender] = useState(filter?.gender || "unknown");
+  const [status, setStatus] = useState(filter?.status || "unknown");
+  const [species, setSpecies] = useState(filter?.species || "");
 
   const handleOnName = useCallback((event: EventType) => {
     const name = event.target.value;
@@ -26,13 +33,13 @@ export const FilterCharacters = () => {
   }, []);
 
   const handleOnGender = useCallback((event: EventType) => {
-    const gender = event.target.value;
+    const gender = event.target.value as IGender;
     setGender(gender);
     dispatch(setFilter({ gender }));
   }, []);
 
   const handleOnStatus = useCallback((event: EventType) => {
-    const status = event.target.value;
+    const status = event.target.value as ILiveStatus;
     setStatus(status);
     dispatch(setFilter({ status }));
   }, []);
