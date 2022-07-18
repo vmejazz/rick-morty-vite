@@ -1,17 +1,14 @@
-import React, { useCallback } from 'react'
+import React, { memo, useCallback } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Typography from "@mui/material/Typography";
 import { FilterCharacters } from "./components";
-import { setAppLoading, setAppShowType } from "../../store/slices/appReducer";
-import { setCharactersInfo, setCharactersItems } from "../../store/slices/charactersReducer";
-import { useDispatch, useSelector } from 'react-redux';
-import { getCharacter, getCharacters } from '../../api';
-import { ICharacterResponse } from '../../models';
-import { selectApp } from '../../store';
+import { useDispatch, useSelector } from "react-redux";
+import { selectApp } from "../../store";
+import { getApiUrl, getData } from "../../utils";
+import { getRequestData } from "../../api/utils";
 
 export interface DialogTitleProps {
   id: string;
@@ -19,10 +16,10 @@ export interface DialogTitleProps {
   onClose: () => void;
 }
 
-export const Filter = () => {
-  const dispatch = useDispatch()
+export const Filter = memo(() => {
+  const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
-  const { filter } =  useSelector(selectApp)
+  const { filter, showType } = useSelector(selectApp);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -31,20 +28,14 @@ export const Filter = () => {
     setOpen(false);
   };
 
-  const handleOnApply = useCallback(async() => {
-    dispatch(setAppLoading(true));
-    const res: ICharacterResponse = await getCharacter(filter);
-    // const restAnswer2 = await getCharacter({name: 'Rick', gender: 'male'})
-    // const restAnswer2 = await getCharacter({ name: "Rick" });
-    if (res) {
-      dispatch(setCharactersItems(res.results));
-      dispatch(setCharactersInfo(res.info));
-      dispatch(setAppShowType("characters"));
-  
-      dispatch(setAppLoading(false));
-      handleClose()
-    }
-  },[filter])
+  const handleOnApply = useCallback(() => {
+    getData(
+      dispatch,
+      `${getApiUrl(showType)}/?${getRequestData(filter)}`,
+      showType
+    );
+    handleClose();
+  }, [filter]);
 
   return (
     <div>
@@ -68,4 +59,4 @@ export const Filter = () => {
       </Dialog>
     </div>
   );
-};
+});

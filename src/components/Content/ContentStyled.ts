@@ -6,4 +6,5 @@ export const ContentWrapper = styled.div`
   grid-template-rows: auto;
   justify-items: center;
   /* justify-content: space-between; */
-`
+  margin-bottom: 40px;
+`;

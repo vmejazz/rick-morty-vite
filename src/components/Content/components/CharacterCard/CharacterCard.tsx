@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -11,7 +11,7 @@ interface IProps {
   item: ICharacter;
 }
 
-export const CharacterCard: FC<IProps> = ({ item }) => {
+export const CharacterCard: FC<IProps> = memo(({ item }) => {
   const {
     image,
     id,
@@ -29,7 +29,7 @@ export const CharacterCard: FC<IProps> = ({ item }) => {
   const itemKeys = Object.keys(item) as Array<keyof ICharacter>;
 
   return (
-    <Card sx={{ maxWidth: 280, margin: "10px" }}>
+    <Card sx={{ width: 280, margin: "10px" }}>
       <CardMedia component="img" height="200" image={image} />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
@@ -72,14 +72,14 @@ export const CharacterCard: FC<IProps> = ({ item }) => {
           </Typography>
         </div>
 
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+        {/* <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Typography variant="body2" color="text.secondary">
             Episode:
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {episode}
           </Typography>
-        </div>
+        </div> */}
 
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Typography variant="body2" color="text.secondary">
@@ -99,10 +99,10 @@ export const CharacterCard: FC<IProps> = ({ item }) => {
           </Typography>
         </div>
       </CardContent>
-      <CardActions>
+      {/* <CardActions>
         <Button size="small">Share</Button>
         <Button size="small">Learn More</Button>
-      </CardActions>
+      </CardActions> */}
     </Card>
   );
-};
+});

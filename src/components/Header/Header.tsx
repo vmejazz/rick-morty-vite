@@ -1,77 +1,26 @@
 import { Button } from "@mui/material";
-import { FC, useCallback } from "react";
+import { FC, memo, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import {
-  getCharacter,
-  getCharacters,
-  getEpisodes,
-  getLocations,
-} from "../../api";
-import {
-  ICharacterResponse,
-  iEpisodesResponse,
-  ILocationsResponse,
-} from "../../models";
-import { setAppLoading, setAppShowType } from "../../store/slices/appReducer";
-import {
-  setCharactersInfo,
-  setCharactersItems,
-} from "../../store/slices/charactersReducer";
-import { setEpisodes } from "../../store/slices/episodesReducer";
-import { setLocations } from "../../store/slices/locationsReducer";
+import { ItemsType } from "../../models";
+import { getData } from "../../utils";
 import { Filter } from "../Filter";
+import { PaginationField } from "../PaginationField";
 import { ButtonsStyled, FilterStyled, HeaderStyled } from "./HeaderStyled";
 
-// type ISetStoreCharacters = (res: ICharacterResponse) => void;
-// type ISetStoreLocations = (res: ILocationsResponse) => void;
-// type ISetStoreEpisodes = (res: iEpisodesResponse) => void;
-// type ISetResponseStore = ISetStoreCharacters | ISetStoreLocations | ISetStoreEpisodes
-
-export const Header: FC = () => {
+export const Header: FC = memo(() => {
   const dispatch = useDispatch();
 
-  const handlerClickCharacters = useCallback((response: ICharacterResponse) => {
-    dispatch(setCharactersItems(response.results));
-    dispatch(setCharactersInfo(response.info));
-    dispatch(setAppShowType("characters"));
-  }, []);
-  const handlerClickLocations = useCallback((response: ILocationsResponse) => {
-    dispatch(setLocations(response.results));
-    dispatch(setAppShowType("locations"));
-  }, []);
-  const handlerClickEpisodes = useCallback((response: iEpisodesResponse) => {
-    dispatch(setEpisodes(response.results));
-    dispatch(setAppShowType("episodes"));
+  const handleClickCharacters = useCallback(() => {
+    getData(dispatch, "/character", ItemsType.CHARACTERS);
   }, []);
 
-  const requestCharacters = async () => {
-    dispatch(setAppLoading(true));
-    const res: ICharacterResponse = await getCharacters();
-    // const restAnswer2 = await getCharacter({name: 'Rick', gender: 'male'})
-    // const restAnswer2 = await getCharacter({ name: "Rick" });
-    if (res) {
-      handlerClickCharacters(res);
-      dispatch(setAppLoading(false));
-    }
-  };
-  const requestLocations = async () => {
-    dispatch(setAppLoading(true));
-    const res = await getLocations();
+  const handleClickLocations = useCallback(() => {
+    getData(dispatch, "/location", ItemsType.LOCATIONS);
+  }, []);
 
-    if (res) {
-      handlerClickLocations(res);
-      dispatch(setAppLoading(false));
-    }
-  };
-  const requestEpisodes = async () => {
-    dispatch(setAppLoading(true));
-    const res = await getEpisodes();
-
-    if (res) {
-      handlerClickEpisodes(res);
-      dispatch(setAppLoading(false));
-    }
-  };
+  const handleClickEpisodes = useCallback(() => {
+    getData(dispatch, "/episode", ItemsType.EPISODES);
+  }, []);
 
   return (
     <>
@@ -83,16 +32,22 @@ export const Header: FC = () => {
       </HeaderStyled>
 
       <ButtonsStyled>
-        <Button variant="contained" size="large" onClick={requestCharacters}>
-          Get characters
+        <Button
+          variant="contained"
+          size="large"
+          onClick={handleClickCharacters}
+        >
+          Characters
         </Button>
-        <Button variant="contained" size="large" onClick={requestLocations}>
-          Get locations
+        <Button variant="contained" size="large" onClick={handleClickLocations}>
+          Locations
         </Button>
-        <Button variant="contained" size="large" onClick={requestEpisodes}>
-          Get episodes
+        <Button variant="contained" size="large" onClick={handleClickEpisodes}>
+          Episodes
         </Button>
       </ButtonsStyled>
+
+      <PaginationField />
     </>
   );
-};
+});

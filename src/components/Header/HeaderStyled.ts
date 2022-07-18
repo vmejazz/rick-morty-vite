@@ -5,6 +5,7 @@ export const HeaderStyled = styled.h1`
   margin: 0;
   padding: 40px;
   text-align: center;
+  color: black;
 `;
 
 export const ButtonsStyled = styled.div`

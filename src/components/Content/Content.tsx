@@ -4,19 +4,21 @@ import { selectApp } from "../../store";
 import { Loading } from "./components/Loading";
 import { ContentWrapper } from "./ContentStyled";
 import { CharactersList, EpisodesList, LocationsList, Error } from "./components";
+import { ItemsType } from "../../models";
 
 export const Content: FC = () => {
   const {hasError, isLoading, showType} = useSelector(selectApp);
+  console.log("🚀 ~ file: Content.tsx ~ line 10 ~ hasError", hasError)
 
   let content;
   switch (showType) {
-    case "characters":
+    case ItemsType.CHARACTERS:
       content = <CharactersList />;
       break;
-    case "locations":
+    case ItemsType.LOCATIONS:
       content = <LocationsList />;
       break;
-    case "episodes":
+    case ItemsType.EPISODES:
       content = <EpisodesList />;
       break;
     default:
