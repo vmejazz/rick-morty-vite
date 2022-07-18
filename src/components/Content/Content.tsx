@@ -3,12 +3,16 @@ import { useSelector } from "react-redux";
 import { selectApp } from "../../store";
 import { Loading } from "./components/Loading";
 import { ContentWrapper } from "./ContentStyled";
-import { CharactersList, EpisodesList, LocationsList, Error } from "./components";
+import {
+  CharactersList,
+  EpisodesList,
+  LocationsList,
+  Error,
+} from "./components";
 import { ItemsType } from "../../models";
 
 export const Content: FC = () => {
-  const {hasError, isLoading, showType} = useSelector(selectApp);
-  console.log("🚀 ~ file: Content.tsx ~ line 10 ~ hasError", hasError)
+  const { hasError, isLoading, showType } = useSelector(selectApp);
 
   let content;
   switch (showType) {
@@ -30,7 +34,7 @@ export const Content: FC = () => {
   }
 
   if (hasError) {
-    return <Error />
+    return <Error />;
   }
 
   return <ContentWrapper>{content}</ContentWrapper>;

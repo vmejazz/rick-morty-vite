@@ -1,6 +1,6 @@
-import { ItemsType } from "../models";
+import { IShowType, ItemsType } from "../models";
 
-export const getApiUrl = (type: ItemsType) => {
+export const getApiUrl = (type: IShowType) => {
   switch (type) {
     case ItemsType.CHARACTERS:
       return "/character";

@@ -1,22 +1,18 @@
 import {
   FormControl,
   FormControlLabel,
-  FormLabel,
   Radio,
   RadioGroup,
   TextField,
   Typography,
 } from "@mui/material";
 import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
-import { ICharacterRequest } from "../../../../models";
-import { useFormControl } from "@mui/material/FormControl";
 import { useDispatch } from "react-redux";
 import { setFilter } from "../../../../store/slices/appReducer";
 
 type EventType = ChangeEvent<HTMLTextAreaElement | HTMLInputElement>;
 
 export const FilterCharacters = () => {
-  const data: ICharacterRequest = {};
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [gender, setGender] = useState("unknown");
@@ -134,11 +130,3 @@ export const FilterCharacters = () => {
     </div>
   );
 };
-
-// export interface ICharacterRequest {
-//   name?: string;
-//   status?: 'alive' | 'dead' | 'unknown';
-//   species?: string;
-//   type?: string;
-//   gender?: 'female' | 'male' | 'genderless' | 'unknown';
-// }

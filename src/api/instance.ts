@@ -5,4 +5,10 @@ const baseInstance = axios.create({
 });
 
 export const request = (endPoint: string) =>
-  baseInstance.get(endPoint).then((res) => res.data);
+  baseInstance
+    .get(endPoint)
+    .then((res) => res.data)
+    .catch((err) => {
+      console.error(err);
+      return "ERROR";
+    });

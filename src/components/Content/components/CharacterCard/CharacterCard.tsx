@@ -1,9 +1,7 @@
 import React, { FC, memo } from "react";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { ICharacter } from "../../../../models";
 
@@ -72,15 +70,6 @@ export const CharacterCard: FC<IProps> = memo(({ item }) => {
           </Typography>
         </div>
 
-        {/* <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography variant="body2" color="text.secondary">
-            Episode:
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {episode}
-          </Typography>
-        </div> */}
-
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Typography variant="body2" color="text.secondary">
             Origin:
@@ -99,10 +88,6 @@ export const CharacterCard: FC<IProps> = memo(({ item }) => {
           </Typography>
         </div>
       </CardContent>
-      {/* <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
-      </CardActions> */}
     </Card>
   );
 });

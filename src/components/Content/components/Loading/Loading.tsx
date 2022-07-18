@@ -1,9 +1,8 @@
-import React from 'react';
 import CircularProgress from "@mui/material/CircularProgress";
-import { LoadingStyled } from './LoadingStyled';
+import { LoadingStyled } from "./LoadingStyled";
 
 export const Loading = () => (
-  <LoadingStyled >
-    <CircularProgress size={200}/>
+  <LoadingStyled>
+    <CircularProgress size={200} />
   </LoadingStyled>
 );

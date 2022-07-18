@@ -3,4 +3,7 @@ import { IRootState } from "../slices";
 
 const storeSelector = (state: IRootState) => state;
 
-export const selectCharacters = createSelector([storeSelector], (state) => state.characters)
+export const selectCharacters = createSelector(
+  [storeSelector],
+  (state) => state.characters
+);

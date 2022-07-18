@@ -1,20 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  ICharacterRequest,
-  IEpisodeRequest,
-  IInfo,
-  ILocationsRequest,
-  IShowType,
-  ItemsType,
-} from "../../models";
+import { IFilter, IInfo, IShowType, ItemsType } from "../../models";
 
 interface IAppStateProps {
   isLoading: boolean;
   hasError: boolean;
-  showType?: IShowType;
-  filter?: ICharacterRequest | ILocationsRequest | IEpisodeRequest;
+  showType: IShowType;
+  filter?: IFilter;
   infoPage: IInfo;
   latestRequest?: string;
+  isApplied: boolean;
 }
 
 const initialState: IAppStateProps = {
@@ -24,6 +18,7 @@ const initialState: IAppStateProps = {
   filter: {},
   infoPage: {},
   latestRequest: "",
+  isApplied: false,
 };
 
 const appSlice = createSlice({
@@ -42,11 +37,18 @@ const appSlice = createSlice({
     setFilter: (state, { payload }) => {
       state.filter = { ...state.filter, ...payload };
     },
+    setFilterApplied: (state, { payload }) => {
+      state.isApplied = payload;
+    },
     setInfoPage: (state, { payload }) => {
       state.infoPage = payload;
     },
     setLatestRequest: (state, { payload }) => {
       state.latestRequest = payload;
+    },
+    clearFilter: (state) => {
+      state.filter = {};
+      state.isApplied = false;
     },
   },
 });
@@ -58,6 +60,8 @@ export const {
   setFilter,
   setInfoPage,
   setLatestRequest,
+  clearFilter,
+  setFilterApplied,
 } = appSlice.actions;
 
 export default appSlice.reducer;

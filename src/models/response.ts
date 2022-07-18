@@ -8,7 +8,7 @@ export interface ICharacter {
   status: string;
   species: string;
   type: string;
-  gender: "female" | "male" | "genderless" | "unknow";
+  gender: "female" | "male" | "genderless" | "unknown";
   origin: LocationType;
   location: LocationType;
   image: string;
@@ -49,12 +49,11 @@ export interface IEpisode {
   created: string;
 }
 
-export interface iEpisodesResponse  {
-  results: IEpisode[],
-  info: IInfo
+export interface iEpisodesResponse {
+  results: IEpisode[];
+  info: IInfo;
 }
-export interface ILocationsResponse  {
-  results: ILocation[],
-  info: IInfo
+export interface ILocationsResponse {
+  results: ILocation[];
+  info: IInfo;
 }
-

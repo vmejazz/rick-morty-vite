@@ -5,6 +5,5 @@ export const ContentWrapper = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: auto;
   justify-items: center;
-  /* justify-content: space-between; */
   margin-bottom: 40px;
 `;

@@ -8,7 +8,7 @@ interface ILocationsStateProps {
 
 const initialState: ILocationsStateProps = {
   items: [],
-  info: {}
+  info: {},
 };
 
 const locationsSlice = createSlice({

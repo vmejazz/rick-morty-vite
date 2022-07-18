@@ -8,7 +8,7 @@ interface IEpisodesStateProps {
 
 const initialState: IEpisodesStateProps = {
   items: [],
-  info: {}
+  info: {},
 };
 
 const episodesSlice = createSlice({

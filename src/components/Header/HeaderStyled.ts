@@ -10,7 +10,9 @@ export const HeaderStyled = styled.h1`
 
 export const ButtonsStyled = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  margin-left: 40px;
+  margin-right: 40px;
   margin-bottom: 20px;
 `;
 
